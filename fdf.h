@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/11 14:53:24 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/11 13:29:21 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#ifndef FDF_H
+# define FDF_H
 
-int	main(int argc, char **argv)
-{
-	int	fd;
-	if (argc != 2)
-	{
-		ft_putendl_fd("usage: ./fdf <map_file>", 2);
-		return (1);
-	}
-	fd = open(argv[1], O_RDONLY);
-}
+#include "fdf_sourses/minilibx/mlx.h"
+#include <math.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include "libft.h"
+
+#endif
