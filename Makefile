@@ -1,5 +1,5 @@
 make:
-	clang main.c -L fdf_sourses/minilibx -lmlx -framework OpenGL -framework AppKit
+	clang main.c -L /Users/fglsn/Documents/coding/code-server-basecamp/projects/fdf/ -lmlx -framework OpenGL -framework AppKit
 
 man:
 	man fdf_sourses/minilibx/man/man3/mlx.1
