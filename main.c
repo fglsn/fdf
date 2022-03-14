@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/14 11:46:14 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/14 12:31:39 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ t_map	*init_map(void)
 int		fill_struct(char **splitted_line, int width, t_map *map)
 {
 	int	*int_line;
+	int	i;
 
+	i = 0;
 	if (!map->width)
 		map->width = width;
 	else if (width != map->width)
@@ -42,7 +44,19 @@ int		fill_struct(char **splitted_line, int width, t_map *map)
 	int_line = malloc(sizeof(int) * (width));
 	if (!int_line)
 		return (0);
-	
+	while (i < width)
+	{
+		int_line[i] = ft_atoi(splitted_line[i]);
+		i++;
+	}
+	if (map->heihgt == map->lines_capacity)
+	{
+		map->lines_capacity = malloc(sizeof(int) * (map->lines_capacity * 2));
+		if (!map->lines_capacity)
+			return (0);	
+	}
+	map->lines[map->height] = int_line;
+	map->heihgt++;
 }
 
 int		read_map(const int fd, t_map *map)
@@ -68,10 +82,9 @@ int		read_map(const int fd, t_map *map)
 		if (!fill_struct(splitted_line, width, map))
 		{
 			ft_arraydel(splitted_line, width);
-			ft_strdel(&line)
+			ft_strdel(&line);
 			return (0);
 		}
-		
 	}
 	return (read_ret);
 }
