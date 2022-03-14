@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/14 14:11:04 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/14 15:51:40 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 t_map	*init_map(void)
 {
 	t_map	*map;
-	
+
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
@@ -32,7 +32,7 @@ t_map	*init_map(void)
 	return (map);
 }
 
-int		fill_struct(char **splitted_line, int width, t_map *map)
+int	fill_struct(char **splitted_line, int width, t_map *map)
 {
 	int	*int_line;
 	int	**new_lines;
@@ -66,14 +66,13 @@ int		fill_struct(char **splitted_line, int width, t_map *map)
 	return (1);
 }
 
-int		read_map(const int fd, t_map *map)
+int	read_map(const int fd, t_map *map)
 {
 	int		read_ret;
 	char	*line;
 	char	**splitted_line;
 	int		width;
-	int line_count = 0;
-	
+
 	width = 0;
 	read_ret = get_next_line(fd, &line);
 	while (read_ret == 1)
@@ -86,61 +85,32 @@ int		read_map(const int fd, t_map *map)
 		}
 		width = 0;
 		while (splitted_line[width] != NULL)
-		{
-			printf("Splitted line %d at %d: '%s'\n", line_count, width, splitted_line[width]);
 			width++;
-		}
 		if (!fill_struct(splitted_line, width, map))
 		{
 			ft_arraydel(splitted_line, width);
 			ft_strdel(&line);
 			return (-1);
 		}
-		line_count++;
 		read_ret = get_next_line(fd, &line);
 	}
 	return (read_ret);
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int		fd;
 	t_map	*map;
 
 	if (argc != 2)
-	{
-		ft_putendl_fd("Usage: ./fdf <map_file>", 2);
-		exit (1);
-	}
+		exit_program(USAGE_ERROR);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-	{
-		ft_putendl_fd("Failed to open a map.", 2);
-		exit (1);
-	}
+		exit_program(OPEN_MAP_ERROR);
 	map = init_map();
 	if (!map)
-	{
-		ft_putendl_fd("Failed to initialize map.", 2);
-		exit (1);
-	}
+		exit_program(INIT_MAP_ERROR);
 	if (read_map(fd, map) == -1)
-	{
-		ft_putendl_fd("Failed to read a map.", 2);
-		exit (1);
-	}
-	printf("%d, %d\n", map->width, map->height);
-	int	i = 0;
-	int j;
-	while (i < map->height)
-	{
-		j = 0;
-		while (j != map->width)
-		{
-			printf("%d ", map->lines[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
+		exit_program(READ_MAP_ERROR);
+	print_map(map);
 }

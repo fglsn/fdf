@@ -10,7 +10,8 @@ LIBFT = ./libft/libft.a
 
 LIBRARIES = -lm -lft -L$(LIBFT_DIR) -L$(MINILIBX_DIR) -lmlx -framework OpenGL -framework AppKit
 
-FUNCTIONS = main.c
+FUNCTIONS = main.c \
+	helpers.c \
 
 OBJECTS = $(addprefix $(OBJ_DIR),$(OBJ_FILES))
 OBJ_FILES = $(FUNCTIONS:.c=.o)
