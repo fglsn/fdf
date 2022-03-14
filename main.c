@@ -6,11 +6,12 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/14 12:31:39 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/14 14:11:04 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 t_map	*init_map(void)
 {
@@ -20,9 +21,9 @@ t_map	*init_map(void)
 	if (!map)
 		return (NULL);
 	map->width = 0;
-	map->heihgt = 0;
+	map->height = 0;
 	map->lines_capacity = 16;
-	map->lines = malloc(sizeof(int) * map->lines_capacity);
+	map->lines = malloc(sizeof(int *) * map->lines_capacity);
 	if (!map->lines)
 	{
 		free(map);
@@ -34,6 +35,7 @@ t_map	*init_map(void)
 int		fill_struct(char **splitted_line, int width, t_map *map)
 {
 	int	*int_line;
+	int	**new_lines;
 	int	i;
 
 	i = 0;
@@ -49,14 +51,19 @@ int		fill_struct(char **splitted_line, int width, t_map *map)
 		int_line[i] = ft_atoi(splitted_line[i]);
 		i++;
 	}
-	if (map->heihgt == map->lines_capacity)
+	if (map->height == map->lines_capacity)
 	{
-		map->lines_capacity = malloc(sizeof(int) * (map->lines_capacity * 2));
-		if (!map->lines_capacity)
-			return (0);	
+		map->lines_capacity = map->lines_capacity * 2;
+		new_lines = malloc(sizeof(int *) * map->lines_capacity);
+		if (!new_lines)
+			return (0);
+		ft_memcpy(new_lines, map->lines, map->height * sizeof(int *));
+		free(map->lines);
+		map->lines = new_lines;
 	}
 	map->lines[map->height] = int_line;
-	map->heihgt++;
+	map->height++;
+	return (1);
 }
 
 int		read_map(const int fd, t_map *map)
@@ -65,35 +72,40 @@ int		read_map(const int fd, t_map *map)
 	char	*line;
 	char	**splitted_line;
 	int		width;
+	int line_count = 0;
 	
 	width = 0;
-	read_ret = 1;
+	read_ret = get_next_line(fd, &line);
 	while (read_ret == 1)
 	{
-		read_ret = get_next_line(fd, &line);
 		splitted_line = ft_strsplit(line, ' ');
 		if (!splitted_line)
 		{
-			ft_strdel(&line)
-			return (0);
+			ft_strdel(&line);
+			return (-1);
 		}
+		width = 0;
 		while (splitted_line[width] != NULL)
+		{
+			printf("Splitted line %d at %d: '%s'\n", line_count, width, splitted_line[width]);
 			width++;
+		}
 		if (!fill_struct(splitted_line, width, map))
 		{
 			ft_arraydel(splitted_line, width);
 			ft_strdel(&line);
-			return (0);
+			return (-1);
 		}
+		line_count++;
+		read_ret = get_next_line(fd, &line);
 	}
 	return (read_ret);
 }
 
 int		main(int argc, char **argv)
 {
-	const int	fd;
-	char		*line;
-	t_map		*map;
+	int		fd;
+	t_map	*map;
 
 	if (argc != 2)
 	{
@@ -112,9 +124,23 @@ int		main(int argc, char **argv)
 		ft_putendl_fd("Failed to initialize map.", 2);
 		exit (1);
 	}
-	if (!read_map(fd, map))
+	if (read_map(fd, map) == -1)
 	{
 		ft_putendl_fd("Failed to read a map.", 2);
 		exit (1);
+	}
+	printf("%d, %d\n", map->width, map->height);
+	int	i = 0;
+	int j;
+	while (i < map->height)
+	{
+		j = 0;
+		while (j != map->width)
+		{
+			printf("%d ", map->lines[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
 	}
 }
