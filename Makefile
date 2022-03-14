@@ -12,6 +12,7 @@ LIBRARIES = -lm -lft -L$(LIBFT_DIR) -L$(MINILIBX_DIR) -lmlx -framework OpenGL -f
 
 FUNCTIONS = main.c \
 	helpers.c \
+	mlx.c \
 
 OBJECTS = $(addprefix $(OBJ_DIR),$(OBJ_FILES))
 OBJ_FILES = $(FUNCTIONS:.c=.o)

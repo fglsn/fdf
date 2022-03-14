@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/14 15:51:40 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/14 17:04:16 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +113,5 @@ int	main(int argc, char **argv)
 	if (read_map(fd, map) == -1)
 		exit_program(READ_MAP_ERROR);
 	print_map(map);
+	draw();
 }
