@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/14 17:10:00 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/14 17:17:21 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # include <stdio.h> //temp
 
-# define ERROR			"Error."
+# define ERROR			"MLX error."
 # define USAGE_ERROR	"Usage: ./fdf <map_file>"
 # define OPEN_MAP_ERROR	"Failed to open a map."
 # define INIT_MAP_ERROR	"Failed to initialize a map."
