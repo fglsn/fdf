@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 16:58:16 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/15 16:57:41 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:05:58 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,7 @@ void	bresenham(int x0, int y0, int x1, int y1, t_mlx *mlx)
 
 	dx = ft_abs(x1 - x0);
 	dy = ft_abs(y1 - y0);
-	if (dx > dy)
-		err = dx / 2;
-	else
-		err = -dy / 2;
+	err = bresenham_err(dx, dy);
 	while (1)
 	{
 		my_mlx_pixel_put(mlx, x0, y0, 0x00FF0000);
@@ -67,12 +64,12 @@ void	bresenham(int x0, int y0, int x1, int y1, t_mlx *mlx)
 		if (e2 > -dx)
 		{
 			err -= dy;
-			x0 += ft_which_bigger(x0, x1);
+			x0 += ft_direction(x0, x1);
 		}
 		if (e2 < dy)
 		{
 			err += dx;
-			y0 += ft_which_bigger(y0, y1);
+			y0 += ft_direction(y0, y1);
 		}
 	}
 }
@@ -131,7 +128,7 @@ void	draw(void)
 
 	mlx = init_fdf();
 	//draw_circle(mlx, 250, 250, 50);
-	bresenham(10, -50, 500, 320, mlx);
+	bresenham(10, 50, 500, 320, mlx);
 	bresenham(50, 10, 320, 500, mlx);
 	bresenham(0, 50, 0, 320, mlx);
 	bresenham(10, 0, 320, 0, mlx);

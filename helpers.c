@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:51:21 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/15 16:41:54 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:03:36 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,22 @@ int	ft_abs(int a)
 		return (a);
 }
 
-int	ft_which_bigger(int a, int b)
+int	ft_direction(int a, int b)
 {
 	if (a < b)
 		return (1);
 	else
 		return (-1);
 }
+
+int	bresenham_err(int dx, int dy)
+{
+	if (dx > dy)
+		return (dx / 2);
+	else
+		return (-dy / 2);
+}
+
 
 void	exit_program(char *str)
 {

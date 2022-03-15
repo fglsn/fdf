@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/15 16:39:54 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:04:45 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int		fill_struct(char **splitted_line, int width, t_map *map);
 void	print_map(t_map *map); //temp
 void	exit_program(char *str);
 int		ft_abs(int a);
-int		ft_which_bigger(int a, int b);
+int		ft_direction(int a, int b);
+int		bresenham_err(int dx, int dy);
 
 #endif
