@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 16:58:16 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/14 17:13:22 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/15 14:12:53 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,23 @@ void	draw_circle(t_mlx *mlx, int x, int y, int r)
 	}
 }
 
+int deal_key(int keycode, t_mlx *mlx)
+{
+	if (keycode == 53)
+	{
+		mlx_destroy_window(mlx->mlx, mlx->window);
+		exit (0);
+	}
+	return (0);
+}
+
 void	draw(void)
 {
 	t_mlx	*mlx;
 	
 	mlx = init_fdf();
-	draw_circle(mlx, 100, 100, 150);
+	draw_circle(mlx, 250, 250, 50);
 	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->img, 0, 0);
+	mlx_key_hook(mlx->window, deal_key, mlx);
 	mlx_loop(mlx->mlx);
 }
