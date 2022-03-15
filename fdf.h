@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/14 17:17:21 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/15 16:39:54 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # define OPEN_MAP_ERROR	"Failed to open a map."
 # define INIT_MAP_ERROR	"Failed to initialize a map."
 # define READ_MAP_ERROR	"Failed to read a map."
+
+# define MAX(a, b) (a > b ? a : b)
+# define ABS(a) (a < 0 ? -a : a)
 
 typedef struct s_map
 {
@@ -63,5 +66,7 @@ int		read_map(const int fd, t_map *map);
 int		fill_struct(char **splitted_line, int width, t_map *map);
 void	print_map(t_map *map); //temp
 void	exit_program(char *str);
+int		ft_abs(int a);
+int		ft_which_bigger(int a, int b);
 
 #endif

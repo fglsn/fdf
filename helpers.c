@@ -6,11 +6,27 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:51:21 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/14 15:55:26 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/15 16:41:54 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int	ft_abs(int a)
+{
+	if (a < 0)
+		return (-a);
+	else 
+		return (a);
+}
+
+int	ft_which_bigger(int a, int b)
+{
+	if (a < b)
+		return (1);
+	else
+		return (-1);
+}
 
 void	exit_program(char *str)
 {
