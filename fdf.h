@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/16 12:51:17 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/16 13:28:16 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct	s_mlx
 	int		line_length;
 	int		endian;
 	int		zoom;
+	int		color;
 }				t_mlx;
 
 
@@ -67,7 +68,7 @@ int		deal_key(int keycode, t_mlx *mlx);
 int		ft_abs(int a);
 int		ft_direction(int a, int b);
 int		err_calculation(int dx, int dy);
-void	bresenham(t_p p1, t_p p2, t_mlx *mlx);
+void	bresenham(t_p p1, t_p p2, t_mlx *mlx, t_map *map);
 
 void	zoom(t_p *p1, t_p *p2, t_mlx *mlx);
 t_p		point(int x, int y);
