@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:29:39 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/16 12:42:05 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/16 18:38:43 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_map	*init_map(void)
 	map->width = 0;
 	map->height = 0;
 	map->lines_capacity = 16;
+	map->zoom = 20;
 	map->lines = malloc(sizeof(int *) * map->lines_capacity);
 	if (!map->lines)
 	{
@@ -31,7 +32,7 @@ t_map	*init_map(void)
 	return (map);
 }
 
-t_mlx	*init_mlx(void)
+t_mlx	*init_mlx(t_map *map)
 {
 	t_mlx	*mlx;
 
@@ -44,13 +45,10 @@ t_mlx	*init_mlx(void)
 	mlx->window = mlx_new_window(mlx->mlx, 1920, 1080, "Fdf");
 	if (!mlx->window)
 		exit_program(ERROR);
-	mlx->img = mlx_new_image(mlx->mlx, 1920, 1080);
-	if (!mlx->img)
-		exit_program(ERROR);
-	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel,
-			&mlx->line_length, &mlx->endian);
-	if (!mlx->addr)
-		exit_program(ERROR);
-	mlx->zoom = 20;
+	mlx->img = NULL;
+	mlx->addr = NULL;
+	mlx->offset_x = 200;
+	mlx->offset_y = 100;
+	mlx->map = map;
 	return (mlx);
 }

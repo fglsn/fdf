@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/16 13:28:16 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/16 18:38:14 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdio.h> //temp
 
 # define ERROR			"MLX error."
+# define IMG_ERROR		"Image initialization error."
 # define USAGE_ERROR	"Usage: ./fdf <map_file>"
 # define OPEN_MAP_ERROR	"Failed to open a map."
 # define INIT_MAP_ERROR	"Failed to initialize a map."
@@ -34,6 +35,8 @@ typedef struct s_map
 	int		height;
 	int		**lines;
 	int		lines_capacity; //Size of memory allocated for number of lines (int pointers to lines)
+	int		zoom;
+	int		color;
 }				t_map;
 
 typedef struct	s_mlx
@@ -45,10 +48,10 @@ typedef struct	s_mlx
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		zoom;
-	int		color;
+	int		offset_x;
+	int		offset_y;
+	t_map	*map;
 }				t_mlx;
-
 
 typedef struct s_p
 {
@@ -57,7 +60,7 @@ typedef struct s_p
 }				t_p;
 
 t_map	*init_map(void);
-t_mlx	*init_mlx(void);
+t_mlx	*init_mlx(t_map *map);
 
 int		read_map(const int fd, t_map *map);
 int		fill_struct(char **splitted_line, int width, t_map *map);
@@ -68,11 +71,14 @@ int		deal_key(int keycode, t_mlx *mlx);
 int		ft_abs(int a);
 int		ft_direction(int a, int b);
 int		err_calculation(int dx, int dy);
-void	bresenham(t_p p1, t_p p2, t_mlx *mlx, t_map *map);
+void	bresenham(t_p p1, t_p p2, t_mlx *mlx);
 
 void	zoom(t_p *p1, t_p *p2, t_mlx *mlx);
 t_p		point(int x, int y);
-void	draw(t_map	*map, t_mlx *mlx);
+void	draw(t_mlx *mlx);
+
+void	init_img(t_mlx *mlx);
+void	destroy_img(t_mlx *mlx);
 
 void	exit_program(char *str);
 void	print_map(t_map *map);
