@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/15 17:04:45 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/16 12:51:17 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@
 # define INIT_MAP_ERROR	"Failed to initialize a map."
 # define READ_MAP_ERROR	"Failed to read a map."
 
-# define MAX(a, b) (a > b ? a : b)
-# define ABS(a) (a < 0 ? -a : a)
-
 typedef struct s_map
 {
 	int		width;
@@ -48,26 +45,36 @@ typedef struct	s_mlx
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		zoom;
 }				t_mlx;
 
 
-typedef struct s_point
+typedef struct s_p
 {
 	int		x;
 	int		y;
-	int		z;
-	int		color;
-}				t_point;
+}				t_p;
 
-t_mlx	*init_fdf(void);
-void	draw(void);
 t_map	*init_map(void);
+t_mlx	*init_mlx(void);
+
 int		read_map(const int fd, t_map *map);
 int		fill_struct(char **splitted_line, int width, t_map *map);
-void	print_map(t_map *map); //temp
-void	exit_program(char *str);
+
+void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+int		deal_key(int keycode, t_mlx *mlx);
+
 int		ft_abs(int a);
 int		ft_direction(int a, int b);
-int		bresenham_err(int dx, int dy);
+int		err_calculation(int dx, int dy);
+void	bresenham(t_p p1, t_p p2, t_mlx *mlx);
+
+void	zoom(t_p *p1, t_p *p2, t_mlx *mlx);
+t_p		point(int x, int y);
+void	draw(t_map	*map, t_mlx *mlx);
+
+void	exit_program(char *str);
+void	print_map(t_map *map);
+
 
 #endif

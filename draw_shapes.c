@@ -2,6 +2,44 @@
 #include <math.h>
 #include "fdf.h"
 
+// void	bresenham_algo(t_mlx *mlx, int x, int y, int x1, int y1)
+// {
+// 	int	x_step;
+// 	int	y_step;
+// 	int	max;
+
+// 	x_step = ABS(x1 - x);
+// 	y_step = ABS(y1 - y);
+// 	max = MAX(x_step, y_step);
+// 	printf("MAX: %d\n", max); //
+// 	x_step /= max;
+// 	y_step /= max;
+// 	while ((int)(x - x1) || (int)(y - y1))
+// 	{
+// 		my_mlx_pixel_put(mlx, x, y, 0x00FF0000);
+// 		x += x_step;
+// 		y += y_step;
+// 	}
+// }
+
+// void	draw_circle(t_mlx *mlx, int x, int y, int r)
+// {
+// 	int	i;
+// 	double	j1, j2;
+// 	int	d;
+
+// 	d = r * 2;
+// 	i = x - r;
+// 	while (i <= x + r)
+// 	{
+// 		j1 = sqrt(r * r - (i - x) * (i - x)) + y;
+// 		j2 = -j1 + y * 2;
+// 		my_mlx_pixel_put(mlx, j1, i, 0x00FF0000);
+// 		my_mlx_pixel_put(mlx, j2, i, 0x00FF0000);
+// 		i++;
+// 	}
+// }
+
 typedef struct	s_data
 {
 	void	*img;

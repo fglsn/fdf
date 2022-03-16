@@ -6,31 +6,12 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/15 13:47:16 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/16 13:03:05 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
-
-t_map	*init_map(void)
-{
-	t_map	*map;
-
-	map = malloc(sizeof(t_map));
-	if (!map)
-		return (NULL);
-	map->width = 0;
-	map->height = 0;
-	map->lines_capacity = 16;
-	map->lines = malloc(sizeof(int *) * map->lines_capacity);
-	if (!map->lines)
-	{
-		free(map);
-		return (NULL);
-	}
-	return (map);
-}
 
 int	fill_struct(char **splitted_line, int width, t_map *map)
 {
@@ -101,6 +82,7 @@ int	main(int argc, char **argv)
 {
 	int		fd;
 	t_map	*map;
+	t_mlx	*mlx;
 
 	if (argc != 2)
 		exit_program(USAGE_ERROR);
@@ -113,6 +95,8 @@ int	main(int argc, char **argv)
 	if (read_map(fd, map) == -1)
 		exit_program(READ_MAP_ERROR);
 	print_map(map);
-	draw();
+	mlx = init_mlx();
+	draw(map, mlx);
+	mlx_loop(mlx->mlx);
 	close(fd);
 }

@@ -1,39 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers.c                                          :+:      :+:    :+:   */
+/*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 15:51:21 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/16 12:31:45 by ishakuro         ###   ########.fr       */
+/*   Created: 2022/03/16 12:31:14 by ishakuro          #+#    #+#             */
+/*   Updated: 2022/03/16 12:40:23 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	exit_program(char *str)
+int	ft_abs(int a)
 {
-	ft_putendl_fd(str, 2);
-	exit (1);
+	if (a < 0)
+		return (-a);
+	else 
+		return (a);
 }
 
-void	print_map(t_map *map) //temp function
+int	ft_direction(int a, int b)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	printf("%d, %d\n", map->width, map->height);
-	while (i < map->height)
-	{
-		j = 0;
-		while (j != map->width)
-		{
-			printf("%d ", map->lines[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
+	if (a < b)
+		return (1);
+	else
+		return (-1);
 }
+
+int	err_calculation(int dx, int dy)
+{
+	if (dx > dy)
+		return (dx / 2);
+	else
+		return (-dy / 2);
+}
+
+void	zoom(t_p *p1, t_p *p2, t_mlx *mlx)
+{
+	p1->x *= mlx->zoom;
+	p1->y *= mlx->zoom;
+	p2->x *= mlx->zoom;
+	p2->y *= mlx->zoom;
+}
+
