@@ -13,7 +13,7 @@ LIBRARIES = -lm -lft -L$(LIBFT_DIR) -L$(MINILIBX_DIR) -lmlx -framework OpenGL -f
 FUNCTIONS = main.c \
 	init.c \
 	helpers.c \
-	bresenham_conditions.c \
+	bresenham.c \
 	draw.c \
 
 OBJECTS = $(addprefix $(OBJ_DIR),$(OBJ_FILES))

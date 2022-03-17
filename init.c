@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:29:39 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/16 18:38:43 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:50:24 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_map	*init_map(void)
 	map->lines_capacity = 16;
 	map->zoom = 20;
 	map->lines = malloc(sizeof(int *) * map->lines_capacity);
+	map->z_offset = 0;
 	if (!map->lines)
 	{
 		free(map);

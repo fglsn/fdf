@@ -6,12 +6,43 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/16 17:02:37 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:56:39 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
+
+int	min_altitude(t_map *map)
+{
+	int	i;
+	int	j;
+	int	min;
+
+	i = 0;
+	min = 0;
+	while (i < map->height)
+	{
+		j = 0;
+		while (j < map->width)
+		{
+			if (map->lines[i][j] < min)
+				min = map->lines[i][j];
+			j++;
+		}
+		i++;
+	}
+	return (min);
+}
+
+void	z_offset(t_map *map)
+{
+	int	min;
+	
+	min = min_altitude(map);
+	if (min < 0)
+		map->z_offset = ft_abs(min);
+}
 
 int	fill_struct(char **splitted_line, int width, t_map *map)
 {
@@ -75,6 +106,7 @@ int	read_map(const int fd, t_map *map)
 		}
 		read_ret = get_next_line(fd, &line);
 	}
+	z_offset(map);
 	return (read_ret);
 }
 

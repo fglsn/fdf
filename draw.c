@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 16:58:16 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/16 18:39:28 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:11:48 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int	deal_key(int keycode, t_mlx *mlx)
 		mlx->offset_x += 16;
 	if (keycode == 123)
 		mlx->offset_x -= 16;
+	if (keycode == 24)
+		mlx->map->zoom += 1;
+	if (keycode == 27)
+		mlx->map->zoom -= 1;
 	mlx_clear_window(mlx->mlx, mlx->window);
 	init_img(mlx);
 	draw(mlx);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bresenham_conditions.c                             :+:      :+:    :+:   */
+/*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:31:14 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/16 17:03:29 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:00:22 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	bresenham(t_p p1, t_p p2, t_mlx *mlx)
 	int	z;
 	int z2;
 
-	z = mlx->map->lines[p1.y][p1.x];
-	z2 = mlx->map->lines[p2.y][p2.x];
+	z = mlx->map->lines[p1.y][p1.x] + mlx->map->z_offset;
+	z2 = mlx->map->lines[p2.y][p2.x] + mlx->map->z_offset;
 	zoom(&p1, &p2, mlx);
 	iso(&p1, z);
 	iso(&p2, z2);

@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/16 18:38:14 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:47:35 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_map
 	int		lines_capacity; //Size of memory allocated for number of lines (int pointers to lines)
 	int		zoom;
 	int		color;
+	int		z_offset;
 }				t_map;
 
 typedef struct	s_mlx
