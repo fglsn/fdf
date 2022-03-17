@@ -40,6 +40,17 @@
 // 	}
 // }
 
+// void iso(t_p *p, int z)
+// {
+// 	int	previous_x;
+// 	int	previous_y;
+
+// 	previous_x = p->x;
+// 	previous_y = p->y;
+// 	p->x = (previous_x - previous_y) * cos(0.523599);
+// 	p->y = -z + (previous_x + previous_y) * sin(0.523599);
+// }
+
 typedef struct	s_data
 {
 	void	*img;

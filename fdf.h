@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/17 12:47:35 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/17 16:58:46 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <stdlib.h>
 
 # include <stdio.h> //temp
+
+# define WIN_WIDTH		1920
+# define WIN_HEIGHT		1080
 
 # define ERROR			"MLX error."
 # define IMG_ERROR		"Image initialization error."
@@ -37,7 +40,7 @@ typedef struct s_map
 	int		lines_capacity; //Size of memory allocated for number of lines (int pointers to lines)
 	int		zoom;
 	int		color;
-	int		z_offset;
+//	int		z_offset;
 }				t_map;
 
 typedef struct	s_mlx
@@ -51,6 +54,8 @@ typedef struct	s_mlx
 	int		endian;
 	int		offset_x;
 	int		offset_y;
+	int		raise_z;
+	float	angle;
 	t_map	*map;
 }				t_mlx;
 

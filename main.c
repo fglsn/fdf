@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/17 12:56:39 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/17 15:15:19 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int	min_altitude(t_map *map)
 	return (min);
 }
 
-void	z_offset(t_map *map)
-{
-	int	min;
+// void	z_offset(t_map *map)
+// {
+// 	int	min;
 	
-	min = min_altitude(map);
-	if (min < 0)
-		map->z_offset = ft_abs(min);
-}
+// 	min = min_altitude(map);
+// //	if (min < 0)
+// //		map->z_offset = ft_abs(min);
+// }
 
 int	fill_struct(char **splitted_line, int width, t_map *map)
 {
@@ -106,7 +106,7 @@ int	read_map(const int fd, t_map *map)
 		}
 		read_ret = get_next_line(fd, &line);
 	}
-	z_offset(map);
+	//z_offset(map);
 	return (read_ret);
 }
 
