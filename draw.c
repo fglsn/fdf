@@ -6,19 +6,23 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 16:58:16 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/17 12:11:48 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:04:50 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	deal_key(int keycode, t_mlx *mlx)
+void	escape(int keycode, t_mlx *mlx)
 {
 	if (keycode == 53)
 	{
 		mlx_destroy_window(mlx->mlx, mlx->window);
 		exit (0);
 	}
+}
+
+void	keyboard_key(int keycode, t_mlx *mlx)
+{
 	if (keycode == 126)
 		mlx->offset_y -= 16;
 	if (keycode == 125)
@@ -31,22 +35,25 @@ int	deal_key(int keycode, t_mlx *mlx)
 		mlx->map->zoom += 1;
 	if (keycode == 27)
 		mlx->map->zoom -= 1;
+	if (keycode == 18)
+		mlx->raise_z++;
+	if (keycode == 19)
+		mlx->raise_z--;
+	if (keycode == 20)
+		mlx->angle += 0.1;
+	if (keycode == 21)
+		mlx->angle -= 0.1;
+}
+
+int	deal_key(int keycode, t_mlx *mlx)
+{
+	keyboard_key(keycode, mlx);
+	escape(keycode, mlx);
 	mlx_clear_window(mlx->mlx, mlx->window);
 	init_img(mlx);
 	draw(mlx);
 	return (0);
 }
-
-// void	iso(t_p *p, int z)
-// {
-// 	int previous_x;
-// 	int previous_y;
-
-// 	previous_x = p->x;
-// 	previous_y = p->y;
-// 	p->x = (previous_x - previous_y) * cos(0.523599);
-// 	p->y = -z + (previous_x + previous_y) * sin(0.523599);
-// }
 
 t_p	point(int x, int y)
 {
@@ -87,9 +94,9 @@ void	draw(t_mlx *mlx)
 		x = 0;
 		while (x < mlx->map->width)
 		{
-			if (x < mlx->map->width - 1)
+			if (x != mlx->map->width - 1)
 				bresenham(point(x, y), point(x + 1, y), mlx);
-			if (y < mlx->map->height - 1)
+			if (y != mlx->map->height - 1)
 				bresenham(point(x, y), point(x, y + 1), mlx);
 			x++;
 		}
