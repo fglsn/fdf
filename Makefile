@@ -11,6 +11,7 @@ LIBFT = ./libft/libft.a
 LIBRARIES = -lm -lft -L$(LIBFT_DIR) -L$(MINILIBX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 FUNCTIONS = main.c \
+	keys.c \
 	init.c \
 	helpers.c \
 	bresenham.c \

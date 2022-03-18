@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:31:14 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/17 17:04:12 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/18 10:37:07 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 
 	x_calc = x + mlx->offset_x;
 	y_calc = y + mlx->offset_y;
-	if (x_calc > 0 && x_calc < WIN_WIDTH && y_calc < WIN_HEIGHT)
+	if (x_calc > 0 && y_calc >= 0 && x_calc < WIN_WIDTH && y_calc < WIN_HEIGHT)
 	{
 		dst = mlx->addr + (y_calc * mlx->line_length + x_calc * (mlx->bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
@@ -93,8 +93,12 @@ void	bresenham(t_p p1, t_p p2, t_mlx *mlx)
 	z2 = mlx->map->lines[p2.y][p2.x];
 
 	zoom(&p1, &p2, mlx);
-	iso(&p1, z, mlx);
-	iso(&p2, z2, mlx);
+	
+	if (mlx->projection == 1)
+	{
+		iso(&p1, z, mlx);
+		iso(&p2, z2, mlx);
+	}
 	// p1.x += mlx->offset_x;
 	// p1.y += mlx->offset_y;
 	// p2.x += mlx->offset_x;

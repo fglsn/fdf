@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/17 15:15:19 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/18 13:09:56 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,9 @@ int	main(int argc, char **argv)
 	int		fd;
 	t_map	*map;
 	t_mlx	*mlx;
+	t_mouse	*mouse;
 
+	mouse = NULL;
 	if (argc != 2)
 		exit_program(USAGE_ERROR);
 	fd = open(argv[1], O_RDONLY);
@@ -126,10 +128,11 @@ int	main(int argc, char **argv)
 		exit_program(INIT_MAP_ERROR);
 	if (read_map(fd, map) == -1)
 		exit_program(READ_MAP_ERROR);
-	print_map(map);
+//	print_map(map);
 	mlx = init_mlx(map);
 	draw(mlx);
-	mlx_key_hook(mlx->window, deal_key, mlx);
+	setup_controls(mlx);
+//	mlx_key_hook(mlx->window, deal_key, mlx);
 	mlx_loop(mlx->mlx);
 	close(fd);
 }

@@ -6,54 +6,11 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 16:58:16 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/17 17:04:50 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/18 10:09:55 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	escape(int keycode, t_mlx *mlx)
-{
-	if (keycode == 53)
-	{
-		mlx_destroy_window(mlx->mlx, mlx->window);
-		exit (0);
-	}
-}
-
-void	keyboard_key(int keycode, t_mlx *mlx)
-{
-	if (keycode == 126)
-		mlx->offset_y -= 16;
-	if (keycode == 125)
-		mlx->offset_y += 16;
-	if (keycode == 124)
-		mlx->offset_x += 16;
-	if (keycode == 123)
-		mlx->offset_x -= 16;
-	if (keycode == 24)
-		mlx->map->zoom += 1;
-	if (keycode == 27)
-		mlx->map->zoom -= 1;
-	if (keycode == 18)
-		mlx->raise_z++;
-	if (keycode == 19)
-		mlx->raise_z--;
-	if (keycode == 20)
-		mlx->angle += 0.1;
-	if (keycode == 21)
-		mlx->angle -= 0.1;
-}
-
-int	deal_key(int keycode, t_mlx *mlx)
-{
-	keyboard_key(keycode, mlx);
-	escape(keycode, mlx);
-	mlx_clear_window(mlx->mlx, mlx->window);
-	init_img(mlx);
-	draw(mlx);
-	return (0);
-}
 
 t_p	point(int x, int y)
 {

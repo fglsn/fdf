@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:29:39 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/17 17:00:00 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/18 13:40:08 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ t_mlx	*init_mlx(t_map *map)
 	mlx->offset_y = 100;
 	mlx->raise_z = 1;
 	mlx->angle = 0.523599;
+	mlx->projection = 1;
+	mlx->onclick = 0;
 	mlx->map = map;
+	if (!(mlx->mouse = (t_mouse *)ft_memalloc(sizeof(t_mouse))))
+		exit_program(ERROR);
 	return (mlx);
 }

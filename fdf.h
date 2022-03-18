@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/17 16:58:46 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/18 13:09:42 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 # define WIN_WIDTH		1920
 # define WIN_HEIGHT		1080
+# define PIXELS			1920 * 1080
 
 # define ERROR			"MLX error."
 # define IMG_ERROR		"Image initialization error."
@@ -43,6 +44,14 @@ typedef struct s_map
 //	int		z_offset;
 }				t_map;
 
+typedef struct	s_mouse
+{
+	int		x;
+	int		y;
+	int		prev_x;
+	int		prev_y;
+}				t_mouse;
+
 typedef struct	s_mlx
 {
 	void	*mlx;
@@ -56,7 +65,10 @@ typedef struct	s_mlx
 	int		offset_y;
 	int		raise_z;
 	float	angle;
+	int		projection;
 	t_map	*map;
+	t_mouse	*mouse;
+	int		onclick;
 }				t_mlx;
 
 typedef struct s_p
@@ -72,7 +84,17 @@ int		read_map(const int fd, t_map *map);
 int		fill_struct(char **splitted_line, int width, t_map *map);
 
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
-int		deal_key(int keycode, t_mlx *mlx);
+
+int		deal_key(int keycode, void *param);
+int		escape(void *param);
+void	keyboard_key(int keycode, t_mlx *mlx);
+void	projection(int keycode, t_mlx *mlx);
+
+void	setup_controls(t_mlx *mlx);
+// int		projection(int keycode, void *param);
+// int		keyboard_key(int keycode, void *param);
+// int		escape(int keycode, void *param);
+
 
 int		ft_abs(int a);
 int		ft_direction(int a, int b);
