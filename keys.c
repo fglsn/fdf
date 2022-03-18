@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 10:09:18 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/18 13:46:41 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/18 16:36:01 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,64 +59,10 @@ int	deal_key(int keycode, void *param)
 	mlx = (t_mlx *)param;
 	keyboard_key(keycode, mlx);
 	projection(keycode, mlx);
-//	mlx_clear_window(mlx->mlx, mlx->window);
 	draw(mlx);
 	return (0);
 }
 
-int	mouse(int button, int x, int y, void *param)
-{
-	t_mlx	*mlx;
-
-	(void)x;
-	(void)y;
-	mlx = (t_mlx *)param;
-	if (button == 4)
-		mlx->map->zoom -= 1;
-	if (button == 5)
-		mlx->map->zoom += 1;
-	else if (button == 1)
-	{
-		mlx->mouse->x = x;
-		mlx->mouse->y = y;
-		mlx->onclick = 1;
-	}
-		
-//	mlx_clear_window(mlx->mlx, mlx->window);
-	draw(mlx);
-	return (0);
-}
-
-int	mouse_release(int button, int x, int y, void *param)
-{
-	t_mlx	*mlx;
-
-	mlx = (t_mlx *)param;
-	(void)x;
-	(void)y;
-	(void)button;
-	mlx->onclick = 0;
-	return (0);
-}
-
-int	mouse_move(int x, int y, void *param)
-{
-	t_mlx	*mlx;
-
-	mlx = (t_mlx *)param;
-
-	if (!mlx->onclick)
-		return (0);
-	mlx->mouse->prev_x = mlx->mouse->x;
-	mlx->mouse->prev_y = mlx->mouse->y;
-	mlx->mouse->x = x;
-	mlx->mouse->y = y;
-	mlx->offset_x += x - mlx->mouse->prev_x;
-	mlx->offset_y += y - mlx->mouse->prev_y;
-//		mlx_clear_window(mlx->mlx, mlx->window);
-	draw(mlx);
-	return (0);
-}
 void	setup_controls(t_mlx *mlx)
 {
 	mlx_hook(mlx->window, 2, 0, deal_key, mlx);
@@ -124,7 +70,6 @@ void	setup_controls(t_mlx *mlx)
 	mlx_hook(mlx->window, 4, 0, mouse, mlx);
 	mlx_hook(mlx->window, 6, 0, mouse_move, mlx);
 	mlx_hook(mlx->window, 5, 0, mouse_release, mlx);
-//	mlx_clear_window(mlx->mlx, mlx->window);
 	init_img(mlx);
 	draw(mlx);
 }
