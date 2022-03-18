@@ -6,108 +6,16 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/18 13:09:56 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/18 16:36:32 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
-int	min_altitude(t_map *map)
+void	exit_program(char *str)
 {
-	int	i;
-	int	j;
-	int	min;
-
-	i = 0;
-	min = 0;
-	while (i < map->height)
-	{
-		j = 0;
-		while (j < map->width)
-		{
-			if (map->lines[i][j] < min)
-				min = map->lines[i][j];
-			j++;
-		}
-		i++;
-	}
-	return (min);
-}
-
-// void	z_offset(t_map *map)
-// {
-// 	int	min;
-	
-// 	min = min_altitude(map);
-// //	if (min < 0)
-// //		map->z_offset = ft_abs(min);
-// }
-
-int	fill_struct(char **splitted_line, int width, t_map *map)
-{
-	int	*int_line;
-	int	**new_lines;
-	int	i;
-
-	i = 0;
-	if (!map->width)
-		map->width = width;
-	else if (width != map->width)
-		return (0);
-	int_line = malloc(sizeof(int) * (width));
-	if (!int_line)
-		return (0);
-	while (i < width)
-	{
-		int_line[i] = ft_atoi(splitted_line[i]);
-		i++;
-	}
-	if (map->height == map->lines_capacity)
-	{
-		map->lines_capacity = map->lines_capacity * 2;
-		new_lines = malloc(sizeof(int *) * map->lines_capacity);
-		if (!new_lines)
-			return (0);
-		ft_memcpy(new_lines, map->lines, map->height * sizeof(int *));
-		free(map->lines);
-		map->lines = new_lines;
-	}
-	map->lines[map->height] = int_line;
-	map->height++;
-	return (1);
-}
-
-int	read_map(const int fd, t_map *map)
-{
-	int		read_ret;
-	char	*line;
-	char	**splitted_line;
-	int		width;
-
-	width = 0;
-	read_ret = get_next_line(fd, &line);
-	while (read_ret == 1)
-	{
-		splitted_line = ft_strsplit(line, ' ');
-		if (!splitted_line)
-		{
-			ft_strdel(&line);
-			return (-1);
-		}
-		width = 0;
-		while (splitted_line[width] != NULL)
-			width++;
-		if (!fill_struct(splitted_line, width, map))
-		{
-			ft_arraydel(splitted_line, width);
-			ft_strdel(&line);
-			return (-1);
-		}
-		read_ret = get_next_line(fd, &line);
-	}
-	//z_offset(map);
-	return (read_ret);
+	ft_putendl_fd(str, 2);
+	exit (1);
 }
 
 int	main(int argc, char **argv)
@@ -128,11 +36,9 @@ int	main(int argc, char **argv)
 		exit_program(INIT_MAP_ERROR);
 	if (read_map(fd, map) == -1)
 		exit_program(READ_MAP_ERROR);
-//	print_map(map);
 	mlx = init_mlx(map);
 	draw(mlx);
 	setup_controls(mlx);
-//	mlx_key_hook(mlx->window, deal_key, mlx);
 	mlx_loop(mlx->mlx);
 	close(fd);
 }

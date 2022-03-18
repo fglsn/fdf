@@ -11,10 +11,12 @@ LIBFT = ./libft/libft.a
 LIBRARIES = -lm -lft -L$(LIBFT_DIR) -L$(MINILIBX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 FUNCTIONS = main.c \
-	keys.c \
 	init.c \
-	helpers.c \
+	read.c \
 	bresenham.c \
+	bresenham_utils.c\
+	keys.c \
+	mouse.c \
 	draw.c \
 
 OBJECTS = $(addprefix $(OBJ_DIR),$(OBJ_FILES))

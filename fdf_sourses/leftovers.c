@@ -2,6 +2,49 @@
 #include <math.h>
 #include "fdf.h"
 
+void	print_map(t_map *map) //temp function
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	printf("%d, %d\n", map->width, map->height);
+	while (i < map->height)
+	{
+		j = 0;
+		while (j != map->width)
+		{
+			printf("%d ", map->lines[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
+
+// int	min_altitude(t_map *map)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	min;
+
+// 	i = 0;
+// 	min = 0;
+// 	while (i < map->height)
+// 	{
+// 		j = 0;
+// 		while (j < map->width)
+// 		{
+// 			if (map->lines[i][j] < min)
+// 				min = map->lines[i][j];
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (min);
+// }
+
+
 // void	bresenham_algo(t_mlx *mlx, int x, int y, int x1, int y1)
 // {
 // 	int	x_step;

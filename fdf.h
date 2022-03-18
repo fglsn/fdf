@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/18 13:09:42 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/18 16:33:30 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,26 @@
 
 # define WIN_WIDTH		1920
 # define WIN_HEIGHT		1080
-# define PIXELS			1920 * 1080
 
-# define ERROR			"MLX error."
+# define MLX_ERROR			"MLX error."
 # define IMG_ERROR		"Image initialization error."
 # define USAGE_ERROR	"Usage: ./fdf <map_file>"
 # define OPEN_MAP_ERROR	"Failed to open a map."
 # define INIT_MAP_ERROR	"Failed to initialize a map."
 # define READ_MAP_ERROR	"Failed to read a map."
+# define MALLOC_ERROR	"Failed to allocate memory."
 
 typedef struct s_map
 {
 	int		width;
 	int		height;
 	int		**lines;
-	int		lines_capacity; //Size of memory allocated for number of lines (int pointers to lines)
+	int		lines_capacity;
 	int		zoom;
 	int		color;
-//	int		z_offset;
 }				t_map;
 
-typedef struct	s_mouse
+typedef struct s_mouse
 {
 	int		x;
 	int		y;
@@ -52,7 +51,13 @@ typedef struct	s_mouse
 	int		prev_y;
 }				t_mouse;
 
-typedef struct	s_mlx
+typedef struct s_z
+{
+	int		z1;
+	int		z2;
+}				t_z;
+
+typedef struct s_mlx
 {
 	void	*mlx;
 	void	*window;
@@ -68,6 +73,7 @@ typedef struct	s_mlx
 	int		projection;
 	t_map	*map;
 	t_mouse	*mouse;
+	t_z		*z;
 	int		onclick;
 }				t_mlx;
 
@@ -91,25 +97,25 @@ void	keyboard_key(int keycode, t_mlx *mlx);
 void	projection(int keycode, t_mlx *mlx);
 
 void	setup_controls(t_mlx *mlx);
-// int		projection(int keycode, void *param);
-// int		keyboard_key(int keycode, void *param);
-// int		escape(int keycode, void *param);
-
 
 int		ft_abs(int a);
 int		ft_direction(int a, int b);
 int		err_calculation(int dx, int dy);
-void	bresenham(t_p p1, t_p p2, t_mlx *mlx);
+void	bresenham(t_p p1, t_p p2, t_z *z, t_mlx *mlx);
 
 void	zoom(t_p *p1, t_p *p2, t_mlx *mlx);
 t_p		point(int x, int y);
 void	draw(t_mlx *mlx);
+int		color(int z, int z2, t_map *map);
 
 void	init_img(t_mlx *mlx);
 void	destroy_img(t_mlx *mlx);
 
+int		mouse(int button, int x, int y, void *param);
+int		mouse_move(int x, int y, void *param);
+int		mouse_release(int button, int x, int y, void *param);
+
 void	exit_program(char *str);
 void	print_map(t_map *map);
-
 
 #endif
