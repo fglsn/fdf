@@ -44,6 +44,9 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+norm:
+	norminette bresenham_utils.c bresenham.c draw.c fdf.h init.c keys.c main.c mouse.c read.c 
 	
 man:
 	man fdf_sourses/minilibx/man/man3/mlx.1

@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 16:58:16 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/18 16:19:33 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/21 10:40:11 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	draw(t_mlx *mlx)
 		while (x < mlx->map->width)
 		{
 			if (x != mlx->map->width - 1)
-				bresenham(point(x, y), point(x + 1, y), mlx->z, mlx);
+				bresenham(point(x, y), point(x + 1, y), mlx);
 			if (y != mlx->map->height - 1)
-				bresenham(point(x, y), point(x, y + 1), mlx->z, mlx);
+				bresenham(point(x, y), point(x, y + 1), mlx);
 			x++;
 		}
 		y++;

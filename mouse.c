@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 16:31:42 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/18 16:31:55 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/21 10:44:19 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	mouse_move(int x, int y, void *param)
 	t_mlx	*mlx;
 
 	mlx = (t_mlx *)param;
-
 	if (!mlx->onclick)
 		return (0);
 	mlx->mouse->prev_x = mlx->mouse->x;

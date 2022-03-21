@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:31:14 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/18 16:25:09 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/21 11:15:14 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,35 +40,39 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 	}
 }
 
-void	bresenham(t_p p1, t_p p2, t_z *z, t_mlx *mlx)
+void	init_coordinates(t_p *p1, t_p *p2, t_z *z, t_mlx *mlx)
 {
-	int	dx;
-	int	dy;
+	z->z1 = mlx->map->lines[p1->y][p1->x];
+	z->z2 = mlx->map->lines[p2->y][p2->x];
+	zoom(p1, p2, mlx);
+	if (mlx->projection == 1)
+		apply_projection(p1, p2, z, mlx);
+}
+
+void	bresenham(t_p p1, t_p p2, t_mlx *mlx)
+{
+	t_z	z;
+	t_p	delta;
 	int	err;
 	int	e2;
 
-	z->z1 = mlx->map->lines[p1.y][p1.x];
-	z->z2 = mlx->map->lines[p2.y][p2.x];
-	zoom(&p1, &p2, mlx);
-	if (mlx->projection == 1)
-		apply_projection(&p1, &p2, z, mlx);
-	dx = ft_abs(p1.x - p2.x);
-	dy = ft_abs(p1.y - p2.y);
-	err = err_calculation(dx, dy);
+	init_coordinates(&p1, &p2, &z, mlx);
+	delta = point(ft_abs(p1.x - p2.x), ft_abs(p1.y - p2.y));
+	err = err_calculation(&delta);
 	while (1)
 	{
-		my_mlx_pixel_put(mlx, p1.x, p1.y, color(z->z1, z->z2, mlx->map));
+		my_mlx_pixel_put(mlx, p1.x, p1.y, color(z.z1, z.z2, mlx->map));
 		if (p1.x == p2.x && p1.y == p2.y)
 			break ;
 		e2 = err;
-		if (e2 > -dx)
+		if (e2 > -delta.x)
 		{
-			err -= dy;
+			err -= delta.y;
 			p1.x += ft_direction(p1.x, p2.x);
 		}
-		if (e2 < dy)
+		if (e2 < delta.y)
 		{
-			err += dx;
+			err += delta.x;
 			p1.y += ft_direction(p1.y, p2.y);
 		}
 	}

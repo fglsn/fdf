@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:42:10 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/18 15:42:12 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/21 11:07:01 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int	ft_direction(int a, int b)
 		return (-1);
 }
 
-int	err_calculation(int dx, int dy)
+int	err_calculation(t_p *delta)
 {
-	if (dx > dy)
-		return (dx / 2);
+	if (delta->x > delta->y)
+		return (delta->x / 2);
 	else
-		return (-dy / 2);
+		return (-delta->y / 2);
 }
 
 void	zoom(t_p *p1, t_p *p2, t_mlx *mlx)

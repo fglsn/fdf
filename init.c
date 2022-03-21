@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:29:39 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/18 16:40:35 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/21 10:42:10 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@ t_mlx	*init_mlx(t_map *map)
 		exit_program(MLX_ERROR);
 	mlx->mouse = (t_mouse *)ft_memalloc(sizeof(t_mouse));
 	if (!mlx->mouse)
-		exit_program(MALLOC_ERROR);
-	mlx->z = (t_z *)ft_memalloc(sizeof(t_z));
-	if (!mlx->z)
 		exit_program(MALLOC_ERROR);
 	mlx->img = NULL;
 	mlx->addr = NULL;

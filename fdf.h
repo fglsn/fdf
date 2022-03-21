@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/18 16:33:30 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/03/21 11:18:41 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct s_mlx
 	int		projection;
 	t_map	*map;
 	t_mouse	*mouse;
-	t_z		*z;
 	int		onclick;
 }				t_mlx;
 
@@ -100,8 +99,9 @@ void	setup_controls(t_mlx *mlx);
 
 int		ft_abs(int a);
 int		ft_direction(int a, int b);
-int		err_calculation(int dx, int dy);
-void	bresenham(t_p p1, t_p p2, t_z *z, t_mlx *mlx);
+int		err_calculation(t_p *delta);
+void	bresenham(t_p p1, t_p p2, t_mlx *mlx);
+void	init_coordinates(t_p *p1, t_p *p2, t_z *z, t_mlx *mlx);
 
 void	zoom(t_p *p1, t_p *p2, t_mlx *mlx);
 t_p		point(int x, int y);
