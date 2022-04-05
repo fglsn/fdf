@@ -6,14 +6,14 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:30:08 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/21 11:18:41 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/04/05 11:17:32 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "fdf_sourses/minilibx/mlx.h"
+# include "minilibx/mlx.h"
 # include "libft.h"
 # include <math.h>
 # include <errno.h>
@@ -22,10 +22,10 @@
 
 # include <stdio.h> //temp
 
-# define WIN_WIDTH		1920
-# define WIN_HEIGHT		1080
+# define WIN_WIDTH		1280
+# define WIN_HEIGHT		820
 
-# define MLX_ERROR			"MLX error."
+# define MLX_ERROR		"MLX error."
 # define IMG_ERROR		"Image initialization error."
 # define USAGE_ERROR	"Usage: ./fdf <map_file>"
 # define OPEN_MAP_ERROR	"Failed to open a map."

@@ -6,7 +6,7 @@
 /*   By: ishakuro <ishakuro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:42:10 by ishakuro          #+#    #+#             */
-/*   Updated: 2022/03/21 11:07:01 by ishakuro         ###   ########.fr       */
+/*   Updated: 2022/04/05 12:38:02 by ishakuro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int	err_calculation(t_p *delta)
 		return (-delta->y / 2);
 }
 
-void	zoom(t_p *p1, t_p *p2, t_mlx *mlx)
+void	zoom(t_p *p1, t_p *p2, t_mlx *mlx) 
 {
-	p1->x *= mlx->map->zoom;
-	p1->y *= mlx->map->zoom;
-	p2->x *= mlx->map->zoom;
-	p2->y *= mlx->map->zoom;
+	p1->x = (p1->x - (mlx->map->width / 2)) * mlx->map->zoom; 
+	p1->y = (p1->y - (mlx->map->height / 2)) * mlx->map->zoom;
+	p2->x = (p2->x - (mlx->map->width / 2)) * mlx->map->zoom;
+	p2->y = (p2->y - (mlx->map->height / 2)) * mlx->map->zoom;
 }
 
 int	color(int z, int z2, t_map *map)
