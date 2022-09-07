@@ -1,8 +1,12 @@
 # fdf
 
-This project is about creating a simplified 3D graphic representation of a
-relief landscape.  
-It is written from scratch in C and the only allowed library is minilibx graphic library.
+This project is about creating a simplified 3D graphic “wireframe” (“fils de fer” in french,
+hence the name of the project) representation of a relief landscape linking various points
+(x, y, z) via segments. The coordinates of this landscape are stored in a file passed as
+a parameter to the program.  
+![ Map example ](screenshots/7-map.png?raw=true)  
+  
+The project is written from scratch in C and the only allowed library is minilibx graphic library.
 
 ### General description  
 ![ Description ](screenshots/6-general.png?raw=true)  
