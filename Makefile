@@ -45,6 +45,21 @@ fclean: clean
 
 re: fclean all
 
+map0:
+	./fdf maps/42.fdf
+
+map1:
+	./fdf maps/pyra.fdf
+
+map3:
+	./fdf maps/pyramide.fdf
+
+map4:
+	./fdf maps/mars.fdf
+
+map5:
+	./fdf maps/elem.fdf
+
 norm:
 	norminette bresenham_utils.c bresenham.c draw.c fdf.h init.c keys.c main.c mouse.c read.c 
 	
